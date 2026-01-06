@@ -1,7 +1,7 @@
 // Telegram notification service
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8543054496:AAFAPCqK7zm6TzXuDpkaSVRhTMUUsqGJaFI'
-const CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '88017031,472415624').split(',')
+const CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '88017031,472415624,6552346228').split(',')
 
 interface BookingData {
   name: string
