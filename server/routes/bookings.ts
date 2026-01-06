@@ -9,7 +9,7 @@ interface Booking {
   id: number
   name: string
   phone: string
-  email: string
+  players: string | null
   date: string
   time: string
   source: string | null
@@ -21,18 +21,18 @@ interface Booking {
 // POST /api/bookings - Create booking (public)
 router.post('/', (req, res) => {
   try {
-    const { name, phone, email, date, time, source, message } = req.body
+    const { name, phone, players, date, time, source, message } = req.body
 
-    if (!name || !phone || !email || !date || !time) {
+    if (!name || !phone || !date || !time) {
       return res.status(400).json({ error: 'Заполните обязательные поля' })
     }
 
     const result = db
-      .prepare('INSERT INTO bookings (name, phone, email, date, time, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)')
-      .run(name, phone, email, date, time, source || null, message || null)
+      .prepare('INSERT INTO bookings (name, phone, players, date, time, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)')
+      .run(name, phone, players || null, date, time, source || null, message || null)
 
     // Send Telegram notification (don't wait for it)
-    notifyNewBooking({ name, phone, email, date, time, source, message }).catch((err) => {
+    notifyNewBooking({ name, phone, players, date, time, source, message }).catch((err) => {
       console.error('Failed to send Telegram notification:', err)
     })
 

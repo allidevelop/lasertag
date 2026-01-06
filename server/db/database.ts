@@ -101,7 +101,7 @@ export function initDatabase() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       phone TEXT NOT NULL,
-      email TEXT NOT NULL,
+      players TEXT,
       date TEXT NOT NULL,
       time TEXT NOT NULL,
       source TEXT,
@@ -110,6 +110,13 @@ export function initDatabase() {
       status TEXT DEFAULT 'new'
     )
   `)
+
+  // Add players column if it doesn't exist (for existing databases that had email)
+  try {
+    db.exec(`ALTER TABLE bookings ADD COLUMN players TEXT`)
+  } catch (e) {
+    // Column already exists, ignore
+  }
 
   // Feedback
   db.exec(`

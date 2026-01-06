@@ -6,7 +6,7 @@ const CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '88017031,472415624').split('
 interface BookingData {
   name: string
   phone: string
-  email: string
+  players?: string | null
   date: string
   time: string
   source?: string | null
@@ -59,7 +59,7 @@ export async function notifyNewBooking(booking: BookingData): Promise<void> {
 
 👤 <b>Ім'я:</b> ${escapeHtml(booking.name)}
 📱 <b>Телефон:</b> ${escapeHtml(booking.phone)}
-📧 <b>Email:</b> ${escapeHtml(booking.email)}
+${booking.players ? `👥 <b>Гравців:</b> ${escapeHtml(booking.players)}` : ''}
 📅 <b>Дата:</b> ${escapeHtml(booking.date)}
 🕐 <b>Час:</b> ${escapeHtml(booking.time)}
 ${booking.source ? `📢 <b>Звідки дізнались:</b> ${escapeHtml(booking.source)}` : ''}
