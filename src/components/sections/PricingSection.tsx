@@ -91,12 +91,18 @@ export function PricingSection() {
 
                 <CardContent className="flex-grow">
                   <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
+                    {plan.features.map((feature, featureIndex) => {
+                      // Try to translate feature key, fallback to original text
+                      const translationKey = `pricing.features.${feature}`
+                      const translated = t(translationKey)
+                      const displayText = translated !== translationKey ? translated : feature
+                      return (
+                        <li key={featureIndex} className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                          <span className="text-sm">{displayText}</span>
+                        </li>
+                      )
+                    })}
                   </ul>
                 </CardContent>
 

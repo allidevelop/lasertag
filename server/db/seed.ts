@@ -70,13 +70,13 @@ export async function seedDatabase() {
     insertGallery.run(image.src, image.alt, image.sort_order)
   }
 
-  // Pricing
+  // Pricing - features are translation keys (rental, instructor, scenarios, stats, photo)
   const pricing = [
     {
       name: '1 година',
       price: '600',
       duration: '60 хвилин',
-      features: JSON.stringify(["Оренда ігрової площадки", "Персональний інструктор", "99+ сценаріїв гри", "Статистика після гри", "Фото на пам'ять"]),
+      features: JSON.stringify(["rental", "instructor", "scenarios", "stats", "photo"]),
       popular: 0,
       best_value: 0,
       sort_order: 1,
@@ -85,7 +85,7 @@ export async function seedDatabase() {
       name: '1.5 години',
       price: '900',
       duration: '90 хвилин',
-      features: JSON.stringify(["Оренда ігрової площадки", "Персональний інструктор", "99+ сценаріїв гри", "Статистика після гри", "Фото на пам'ять"]),
+      features: JSON.stringify(["rental", "instructor", "scenarios", "stats", "photo"]),
       popular: 1,
       best_value: 0,
       sort_order: 2,
@@ -94,7 +94,7 @@ export async function seedDatabase() {
       name: '2 години',
       price: '1100',
       duration: '120 хвилин',
-      features: JSON.stringify(["Оренда ігрової площадки", "Персональний інструктор", "99+ сценаріїв гри", "Статистика після гри", "Фото на пам'ять"]),
+      features: JSON.stringify(["rental", "instructor", "scenarios", "stats", "photo"]),
       popular: 0,
       best_value: 1,
       sort_order: 3,
@@ -205,11 +205,11 @@ function migrateDataIfNeeded() {
       insertService.run(s.icon, s.title, s.description, s.sort_order)
     }
 
-    // Pricing
+    // Pricing - features are translation keys
     const pricing = [
-      { name: '1 година', price: '600', duration: '60 хвилин', features: JSON.stringify(["Оренда ігрової площадки", "Персональний інструктор", "99+ сценаріїв гри", "Статистика після гри", "Фото на пам'ять"]), popular: 0, best_value: 0, sort_order: 1 },
-      { name: '1.5 години', price: '900', duration: '90 хвилин', features: JSON.stringify(["Оренда ігрової площадки", "Персональний інструктор", "99+ сценаріїв гри", "Статистика після гри", "Фото на пам'ять"]), popular: 1, best_value: 0, sort_order: 2 },
-      { name: '2 години', price: '1100', duration: '120 хвилин', features: JSON.stringify(["Оренда ігрової площадки", "Персональний інструктор", "99+ сценаріїв гри", "Статистика після гри", "Фото на пам'ять"]), popular: 0, best_value: 1, sort_order: 3 },
+      { name: '1 година', price: '600', duration: '60 хвилин', features: JSON.stringify(["rental", "instructor", "scenarios", "stats", "photo"]), popular: 0, best_value: 0, sort_order: 1 },
+      { name: '1.5 години', price: '900', duration: '90 хвилин', features: JSON.stringify(["rental", "instructor", "scenarios", "stats", "photo"]), popular: 1, best_value: 0, sort_order: 2 },
+      { name: '2 години', price: '1100', duration: '120 хвилин', features: JSON.stringify(["rental", "instructor", "scenarios", "stats", "photo"]), popular: 0, best_value: 1, sort_order: 3 },
     ]
     const insertPricing = db.prepare('INSERT INTO pricing (name, price, duration, features, popular, best_value, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)')
     for (const p of pricing) {

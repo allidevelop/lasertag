@@ -53,24 +53,13 @@
     "book": "Book now",
     "popular": "Most Popular",
     "bestValue": "Best Value",
-    "basic": "Basic",
-    "standard": "Standard",
-    "premium": "Premium",
-    "hour": "hour",
-    "hours": "hours",
-    "equipment": "Equipment rental",
-    "instruction": "Instruction",
-    "players10": "Up to 10 players",
-    "players20": "Up to 20 players",
-    "players30": "Up to 30 players",
-    "outdoor": "Outdoor area",
-    "both": "Outdoor + indoor area",
-    "all": "All areas",
-    "photo": "Photo memories",
-    "photoVideo": "Photo and video shooting",
-    "personalInstructor": "Personal instructor",
-    "premiumEquipment": "Premium equipment",
-    "bbq": "BBQ zone"
+    "features": {
+      "rental": "Game arena rental",
+      "instructor": "Personal instructor",
+      "scenarios": "99+ game scenarios",
+      "stats": "Post-game statistics",
+      "photo": "Photo memories"
+    }
   },
   "testimonials": {
     "title": "Testimonials",
