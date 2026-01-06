@@ -68,6 +68,13 @@ export function initDatabase() {
     // Column already exists, ignore
   }
 
+  // Add phone column to feedback table if it doesn't exist
+  try {
+    db.exec(`ALTER TABLE feedback ADD COLUMN phone TEXT`)
+  } catch (e) {
+    // Column already exists, ignore
+  }
+
   // Testimonials
   db.exec(`
     CREATE TABLE IF NOT EXISTS testimonials (

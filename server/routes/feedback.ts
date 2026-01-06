@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { db } from '../db/database'
 import { authMiddleware, AuthRequest } from '../middleware/auth'
+import { notifyNewFeedback } from '../services/telegram'
 
 const router = Router()
 
@@ -8,6 +9,7 @@ interface Feedback {
   id: number
   name: string
   email: string
+  phone: string | null
   message: string
   created_at: string
 }
@@ -15,15 +17,20 @@ interface Feedback {
 // POST /api/feedback - Create feedback (public)
 router.post('/', (req, res) => {
   try {
-    const { name, email, message } = req.body
+    const { name, email, phone, message } = req.body
 
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'Заполните все поля' })
     }
 
     const result = db
-      .prepare('INSERT INTO feedback (name, email, message) VALUES (?, ?, ?)')
-      .run(name, email, message)
+      .prepare('INSERT INTO feedback (name, email, phone, message) VALUES (?, ?, ?, ?)')
+      .run(name, email, phone || null, message)
+
+    // Send Telegram notification (don't wait for it)
+    notifyNewFeedback({ name, email, phone, message }).catch((err) => {
+      console.error('Failed to send Telegram notification:', err)
+    })
 
     res.json({
       success: true,
