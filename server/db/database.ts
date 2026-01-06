@@ -56,9 +56,17 @@ export function initDatabase() {
       duration TEXT NOT NULL,
       features TEXT NOT NULL,
       popular INTEGER DEFAULT 0,
+      best_value INTEGER DEFAULT 0,
       sort_order INTEGER DEFAULT 0
     )
   `)
+
+  // Add best_value column if it doesn't exist (for existing databases)
+  try {
+    db.exec(`ALTER TABLE pricing ADD COLUMN best_value INTEGER DEFAULT 0`)
+  } catch (e) {
+    // Column already exists, ignore
+  }
 
   // Testimonials
   db.exec(`
