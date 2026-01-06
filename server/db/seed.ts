@@ -157,11 +157,11 @@ export async function seedDatabase() {
 
 // Migrate data if structure changed
 function migrateDataIfNeeded() {
-  // Check if we need to update data (e.g., old Russian data to new Ukrainian)
-  const testimonialsCount = db.prepare('SELECT COUNT(*) as count FROM testimonials').get() as { count: number }
+  // Check if we have old Russian data (look for "Базовый" in pricing)
+  const oldPricing = db.prepare("SELECT * FROM pricing WHERE name LIKE '%Базов%' OR name LIKE '%Стандарт%' OR name LIKE '%Преміум%'").get()
 
-  // If we have old seed data (3 testimonials), replace with new
-  if (testimonialsCount.count <= 3) {
+  // If we have old Russian data, replace with new Ukrainian
+  if (oldPricing) {
     console.log('Migrating to new data...')
 
     // Clear old data
