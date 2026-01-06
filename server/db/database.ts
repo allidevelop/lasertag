@@ -1,7 +1,14 @@
 import Database from 'better-sqlite3'
 import path from 'path'
+import fs from 'fs'
 
-const dbPath = path.join(process.cwd(), 'data', 'lasertag.db')
+const dataDir = path.join(process.cwd(), 'data')
+const dbPath = path.join(dataDir, 'lasertag.db')
+
+// Create data directory if it doesn't exist
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true })
+}
 
 export const db = new Database(dbPath)
 

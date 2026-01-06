@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import path from 'path'
+import fs from 'fs'
 import { initDatabase } from './db/database'
 import { seedDatabase } from './db/seed'
 import authRoutes from './routes/auth'
@@ -25,8 +26,14 @@ app.use('/api', (req, res, next) => {
   next()
 })
 
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(process.cwd(), 'uploads')
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true })
+}
+
 // Serve uploaded files
-app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')))
+app.use('/uploads', express.static(uploadsDir))
 
 // API Routes
 app.use('/api/auth', authRoutes)
