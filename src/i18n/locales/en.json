@@ -1,0 +1,242 @@
+{
+  "nav": {
+    "home": "Home",
+    "forWhom": "For Whom",
+    "services": "Services",
+    "gallery": "Arenas",
+    "pricing": "Pricing",
+    "events": "Events",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Lasertag in Kyiv",
+    "subtitle": "Birthdays • Corporate Events • Friends • Active Recreation",
+    "description": "Exciting team game for kids and adults",
+    "cta": "Book a game",
+    "ctaSecondary": "Watch video",
+    "benefits": {
+      "noPain": "No pain or bullets",
+      "equipment": "Professional equipment",
+      "instructor": "Instructor with every game",
+      "outdoor": "Outdoor arenas in fresh air"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Everything for an unforgettable experience",
+    "outdoor": "Outdoor Lasertag",
+    "outdoorDesc": "Large gaming areas at VDNG territory with natural covers and tactical positions.",
+    "indoor": "Indoor Lasertag",
+    "indoorDesc": "Comfortable gaming in any weather in a specially equipped indoor facility.",
+    "birthday": "Birthday Parties",
+    "birthdayDesc": "Organization of unforgettable children's and adult parties with lasertag battles.",
+    "corporate": "Corporate Events",
+    "corporateDesc": "Team games and team building for corporate events of any scale.",
+    "bbq": "BBQ Zone",
+    "bbqDesc": "Relax after the game in a cozy BBQ area with friends and family.",
+    "tournaments": "Tournaments",
+    "tournamentsDesc": "Regular competitions and tournaments with prizes for true lasertag enthusiasts."
+  },
+  "gallery": {
+    "title": "Our Arenas",
+    "subtitle": "Modern gaming arenas in Kyiv"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Transparent pricing with no hidden fees",
+    "note": "Price depends on the number of players and game duration.",
+    "cta": "Leave a request — we'll find the best option for you.",
+    "currency": "UAH",
+    "perPerson": "per person",
+    "book": "Book now",
+    "popular": "Most Popular",
+    "bestValue": "Best Value",
+    "basic": "Basic",
+    "standard": "Standard",
+    "premium": "Premium",
+    "hour": "hour",
+    "hours": "hours",
+    "equipment": "Equipment rental",
+    "instruction": "Instruction",
+    "players10": "Up to 10 players",
+    "players20": "Up to 20 players",
+    "players30": "Up to 30 players",
+    "outdoor": "Outdoor area",
+    "both": "Outdoor + indoor area",
+    "all": "All areas",
+    "photo": "Photo memories",
+    "photoVideo": "Photo and video shooting",
+    "personalInstructor": "Personal instructor",
+    "premiumEquipment": "Premium equipment",
+    "bbq": "BBQ zone"
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "Trusted by clients who keep coming back",
+    "guestsNote": "Our guests highlight:",
+    "highlights": {
+      "organization": "High level of organization",
+      "instructors": "Attentive instructors",
+      "emotions": "Amazing emotions and drive",
+      "format": "Perfect format for celebrations"
+    },
+    "readAll": "Read all reviews"
+  },
+  "howToPlay": {
+    "title": "How to play lasertag?",
+    "subtitle": "Booking a game and playing lasertag is very easy:",
+    "step1": "Gather a group of 8+ people",
+    "step2": "Choose a date and time",
+    "step3": "Book a game on the website or by phone",
+    "step4": "Arrive at the club 15 minutes early",
+    "step5": "Get your equipment and briefing",
+    "step6": "Play and have fun",
+    "note": "ATTENTION! All players must have a cap, hat or any headwear to attach the sensor headband."
+  },
+  "forWhom": {
+    "title": "Who is Lasertag for",
+    "subtitle": "Lasertag is a universal game for any age and format",
+    "kids": "Kids from 7 years",
+    "kidsDesc": "Safe, no physical contact, maximum emotions",
+    "birthday": "Birthday parties",
+    "birthdayDesc": "An active celebration that will be remembered for a long time",
+    "corporate": "Corporate events & team building",
+    "corporateDesc": "Teamwork, drive and real emotions",
+    "family": "Family recreation",
+    "familyDesc": "Kids and adults play together",
+    "school": "School classes and groups",
+    "schoolDesc": "Organized, safe and fun"
+  },
+  "whyLasertag": {
+    "title": "Why Lasertag",
+    "subtitle": "Why thousands of players choose lasertag",
+    "noBullets": "No bullets, pain or bruises",
+    "noMask": "No masks or special clothing needed",
+    "forAll": "Suitable for kids and adults",
+    "cleanClothes": "Clothes stay clean",
+    "allYear": "Can be played all year round",
+    "realGame": "Computer game atmosphere — but in reality"
+  },
+  "arenas": {
+    "title": "Our Arenas",
+    "subtitle": "Modern gaming arenas in Kyiv",
+    "description": "We run games on specially prepared arenas",
+    "feature1": "With shelters and gaming zones",
+    "feature2": "Thought-out scenarios",
+    "feature3": "Comfortable team gathering zones",
+    "outdoor": "Outdoor locations in summer and winter"
+  },
+  "equipment": {
+    "title": "Equipment",
+    "subtitle": "Professional lasertag equipment",
+    "description": "We use modern taggers and sensors",
+    "feature1": "Realistic Sensations",
+    "feature1Desc": "Recoil and hit shock contribute to full immersion.",
+    "feature2": "Video Game in Reality",
+    "feature2Desc": "20+ game modes and scenarios replicate popular game mechanics",
+    "feature3": "Personal Statistics & Achievements",
+    "feature3Desc": "Motivate players to return to beat their results",
+    "feature4": "Scenarios for Any Age",
+    "feature4Desc": "Kids mode for players from 7 years old.",
+    "note": "Equipment is lightweight, comfortable and suitable for children"
+  },
+  "events": {
+    "title": "Birthdays & Corporate Events",
+    "subtitle": "Turnkey solutions",
+    "feature1": "Full Game Organization",
+    "feature1Desc": "you just arrive",
+    "feature2": "Professional Instructor",
+    "feature2Desc": "control, safety, drive",
+    "feature3": "Scenarios for Age & Team",
+    "feature3Desc": "for kids, adults, large groups",
+    "feature4": "Rest Area After Game",
+    "feature4Desc": "recharge your energy",
+    "feature5": "Celebration Options",
+    "feature5Desc": "pizza, cake, catering, gifts, photos",
+    "description": "You don't need to think of anything — we'll organize everything."
+  },
+  "faq": {
+    "title": "Questions & Answers",
+    "subtitle": "Answers to common questions",
+    "q1": "What is the minimum age to play?",
+    "a1": "From 7 years old",
+    "q2": "Is it safe?",
+    "a2": "Yes. Lasertag has no physical contact or pain",
+    "q3": "How long does the game last?",
+    "a3": "Average game duration is 1.5 hours, but you can choose from one hour",
+    "q4": "Minimum number of people?",
+    "a4": "Optimally — from 8 players",
+    "q5": "What to wear?",
+    "a5": "Comfortable clothes. Bring a cap / hat"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "workingHours": "Working Hours",
+    "followUs": "Follow us"
+  },
+  "map": {
+    "title": "Our Location",
+    "subtitle": "How to find us"
+  },
+  "booking": {
+    "title": "Book a Game",
+    "name": "Full name",
+    "namePlaceholder": "Enter your full name",
+    "phone": "Phone",
+    "phonePlaceholder": "+380 XX XXX XX XX",
+    "players": "Number of players",
+    "playersPlaceholder": "Minimum 8",
+    "playersUnit": "people",
+    "date": "Date",
+    "datePlaceholder": "Select date",
+    "time": "Time",
+    "source": "How did you hear about us?",
+    "sourcePlaceholder": "Select an option",
+    "sourceOptions": {
+      "google": "Google search",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "friends": "From friends",
+      "other": "Other"
+    },
+    "message": "Additional information",
+    "messagePlaceholder": "Special requests...",
+    "submit": "Submit request",
+    "success": "Request sent! We will contact you shortly.",
+    "error": "An error occurred. Please try again."
+  },
+  "feedback": {
+    "title": "Feedback",
+    "name": "Your name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email",
+    "emailPlaceholder": "example@email.com",
+    "phone": "Phone",
+    "phonePlaceholder": "+380 XX XXX XX XX",
+    "message": "Message",
+    "messagePlaceholder": "Your message...",
+    "submit": "Send",
+    "success": "Message sent!",
+    "error": "Sending error"
+  },
+  "theme": {
+    "light": "Light theme",
+    "dark": "Dark theme"
+  },
+  "language": {
+    "ru": "Русский",
+    "uk": "Українська",
+    "en": "English"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "payment": "We accept"
+  }
+}

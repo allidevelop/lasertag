@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --radius: 0.75rem;
+
+  /* Primary - uses CSS variable for theme switching */
+  --color-primary: var(--primary-color);
+  --color-primary-foreground: var(--primary-foreground-color);
+
+  /* Accent */
+  --color-accent: var(--accent-color);
+  --color-accent-foreground: var(--accent-foreground-color);
+
+  /* Destructive */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+}
+
+/* Light theme */
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #0090ff;
+
+  /* Primary/Accent colors for light theme (blue) */
+  --primary-color: #0090ff;
+  --primary-foreground-color: #ffffff;
+  --accent-color: #0090ff;
+  --accent-foreground-color: #ffffff;
+
+  /* Alternating section backgrounds for light theme */
+  --section-dark: #ffffff;
+  --section-darker: #f0f4f8;
+}
+
+/* Dark theme */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #0a0a0a;
+  --popover-foreground: #fafafa;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --border: #3f3f46;
+  --input: #27272a;
+  --ring: #0090ff;
+
+  /* Primary/Accent colors for dark theme (blue) */
+  --primary-color: #0090ff;
+  --primary-foreground-color: #ffffff;
+  --accent-color: #0090ff;
+  --accent-foreground-color: #ffffff;
+
+  /* Alternating section backgrounds - zebra style (dark-blue / dark-gray) */
+  --section-dark: #0a0a0a;
+  --section-darker: #0a1628;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .bg-background {
+    background-color: var(--background);
+  }
+  .bg-foreground {
+    background-color: var(--foreground);
+  }
+  .bg-card {
+    background-color: var(--card);
+  }
+  .bg-popover {
+    background-color: var(--popover);
+  }
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+  .bg-muted {
+    background-color: var(--muted);
+  }
+
+  /* Alternating section backgrounds - zebra style */
+  .bg-section-1 {
+    background-color: var(--section-dark);
+  }
+  .bg-section-2 {
+    background-color: var(--section-darker);
+  }
+
+  .text-foreground {
+    color: var(--foreground);
+  }
+  .text-card-foreground {
+    color: var(--card-foreground);
+  }
+  .text-popover-foreground {
+    color: var(--popover-foreground);
+  }
+  .text-secondary-foreground {
+    color: var(--secondary-foreground);
+  }
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+
+  .border-border {
+    border-color: var(--border);
+  }
+  .border-input {
+    border-color: var(--input);
+  }
+
+  .ring-ring {
+    --tw-ring-color: var(--ring);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Gradient animation for hero */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Laser beam effect */
+@keyframes laser-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.05);
+  }
+}
+
+.laser-effect {
+  animation: laser-pulse 2s ease-in-out infinite;
+}
+
+/* Light theme card shadows */
+:root .bg-card,
+:root [class*="Card"] {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Light theme specific fixes */
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Dark theme for native date picker */
+.dark input[type="date"],
+.dark input[type="time"],
+.dark input[type="datetime-local"] {
+  color-scheme: dark;
+}
+
+/* Style date picker icon */
+.dark input[type="date"]::-webkit-calendar-picker-indicator,
+.dark input[type="time"]::-webkit-calendar-picker-indicator,
+.dark input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator:hover,
+.dark input[type="time"]::-webkit-calendar-picker-indicator:hover,
+.dark input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}

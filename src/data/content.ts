@@ -1,0 +1,162 @@
+import type { SiteContent } from '@/types/content'
+
+export const defaultContent: SiteContent = {
+  hero: {
+    title: 'LASERTAG KIEV',
+    subtitle: 'Лазерні бої для дітей від 7 років та дорослих на ВДНГ',
+    ctaText: 'Забронювати гру',
+    ctaSecondaryText: 'Дізнатися більше',
+    backgroundImage: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/1.jpg',
+  },
+  services: [
+    {
+      id: '1',
+      icon: 'Trees',
+      title: 'Лісовий лазертаг',
+      description: 'Ігри на відкритому повітрі в лісовій зоні ВДНГ. Природні укриття та тактичні позиції для захоплюючих баталій.',
+    },
+    {
+      id: '2',
+      icon: 'Building2',
+      title: 'Аренний лазертаг',
+      description: 'Критий лазертаг в приміщенні ТРЦ "Україна". Комфортна гра в будь-яку погоду.',
+    },
+    {
+      id: '3',
+      icon: 'Truck',
+      title: 'Виїзний лазертаг',
+      description: 'Організуємо гру на вашій території. Привеземо обладнання та проведемо захід будь-де.',
+    },
+    {
+      id: '4',
+      icon: 'Cake',
+      title: 'Дні народження',
+      description: 'Незабутні дитячі свята з лазертаг-баталіями. Для дітей від 7 років. Аніматори, квести, кейтеринг.',
+    },
+    {
+      id: '5',
+      icon: 'Users',
+      title: 'Корпоративи та тімбілдінг',
+      description: 'Командні ігри для корпоративних заходів. До 30 осіб на площадці. 99+ ігрових сценаріїв.',
+    },
+    {
+      id: '6',
+      icon: 'Flame',
+      title: 'Альтанки та барбекю',
+      description: 'Затишні альтанки для відпочинку після гри. Можливість замовлення кейтерингу.',
+    },
+  ],
+  gallery: [
+    { id: '1', src: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/1.jpg', alt: 'Лазертаг гра 1' },
+    { id: '2', src: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/2.jpg', alt: 'Лазертаг гра 2' },
+    { id: '3', src: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/3.jpg', alt: 'Лазертаг гра 3' },
+    { id: '4', src: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/4.jpg', alt: 'Лазертаг гра 4' },
+    { id: '5', src: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/5.jpg', alt: 'Лазертаг гра 5' },
+    { id: '6', src: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/6.jpg', alt: 'Лазертаг гра 6' },
+  ],
+  pricing: [
+    {
+      id: '1',
+      name: '1 година',
+      price: '600',
+      duration: '60 хвилин',
+      features: [
+        'Оренда ігрової площадки',
+        'Персональний інструктор',
+        '99+ сценаріїв гри',
+        'Статистика після гри',
+        'Фото на пам\'ять',
+      ],
+      popular: false,
+    },
+    {
+      id: '2',
+      name: '1.5 години',
+      price: '900',
+      duration: '90 хвилин',
+      features: [
+        'Оренда ігрової площадки',
+        'Персональний інструктор',
+        '99+ сценаріїв гри',
+        'Статистика після гри',
+        'Фото на пам\'ять',
+      ],
+      popular: true,
+    },
+    {
+      id: '3',
+      name: '2 години',
+      price: '1100',
+      duration: '120 хвилин',
+      features: [
+        'Оренда ігрової площадки',
+        'Персональний інструктор',
+        '99+ сценаріїв гри',
+        'Статистика після гри',
+        'Фото на пам\'ять',
+      ],
+      popular: false,
+      bestValue: true,
+    },
+  ],
+  testimonials: [
+    {
+      id: '1',
+      name: 'Олена М.',
+      text: 'Сьогодні відвідали це чудове місце. Грали в гру лазертаг. І хоча рахунок 2:2, але кожен відчув себе переможцем. Дякую привітним інструкторам!',
+      rating: 5,
+    },
+    {
+      id: '2',
+      name: 'Ірина К.',
+      text: 'Дуже сподобалось! Святкували дитяче день народження, замовили лазертаг. Малі були в захваті!',
+      rating: 5,
+    },
+    {
+      id: '3',
+      name: 'Андрій В.',
+      text: 'Ми провели тут тімбілдінг і всім дуже сподобалось! Рекомендую для корпоративів!',
+      rating: 5,
+    },
+  ],
+  contact: {
+    phone: '(097) 204-07-07',
+    email: 'info@ganz-paintball.com',
+    address: 'Київ, ВДНГ, павільйон 21 (пр. Академіка Глушкова, 1)',
+    workingHours: 'Пн-Нд: 10:00 - 20:00',
+    facebook: 'https://www.facebook.com/ganz.paintball',
+    instagram: 'https://www.instagram.com/ganzpaintball',
+  },
+  faq: [
+    {
+      id: '1',
+      question: 'З якого віку можна грати в лазертаг?',
+      answer: 'Мінімальний вік для участі — 7 років. Гра абсолютно безпечна для дітей та дорослих.',
+    },
+    {
+      id: '2',
+      question: 'Що потрібно взяти з собою?',
+      answer: 'Тільки зручний одяг та спортивне взуття. Все обладнання надається на місці.',
+    },
+    {
+      id: '3',
+      question: 'Скільки людей може грати одночасно?',
+      answer: 'На одній площадці можуть грати до 30 осіб. У нас є 3 ігрові площадки.',
+    },
+  ],
+  howToPlay: [
+    { id: '1', icon: 'Users', text: 'Збираєте компанію від 8 осіб' },
+    { id: '2', icon: 'Calendar', text: 'Обираєте дату та час гри' },
+    { id: '3', icon: 'Phone', text: 'Замовляєте гру на сайті або за телефоном' },
+    { id: '4', icon: 'Clock', text: 'Приходите в клуб за 15 хвилин раніше' },
+    { id: '5', icon: 'Crosshair', text: 'Отримуєте комплект обладнання та проходите інструктаж' },
+    { id: '6', icon: 'Smile', text: 'Граєте та отримуєте позитив!' },
+  ],
+  sectionImages: {
+    forWhom: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/1.jpg',
+    whyLasertag: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/2.jpg',
+    howToPlay: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/3.jpg',
+    equipment: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/4.jpg',
+    events: 'https://lasertag.kiev.ua/wp-content/uploads/2020/06/5.jpg',
+  },
+}
