@@ -10,6 +10,8 @@ export async function seedDatabase() {
     console.log('Database already seeded, skipping...')
     // But still check if translations need to be seeded
     seedTranslationsIfNeeded()
+    // Add more testimonials if needed
+    addMoreTestimonialsIfNeeded()
     return
   }
 
@@ -104,6 +106,12 @@ export async function seedDatabase() {
     { name: 'Александр К.', text: 'Отличное место для корпоратива! Команда осталась в восторге, уже планируем следующий визит.', rating: 5 },
     { name: 'Мария С.', text: 'Праздновали день рождения сына. Дети были счастливы, организация на высшем уровне!', rating: 5 },
     { name: 'Дмитрий В.', text: 'Современное оборудование, большая территория, приветливый персонал. Рекомендую!', rating: 5 },
+    { name: 'Олена П.', text: 'Чудове місце для активного відпочинку! Діти в захваті, а дорослі нарешті відволіклися від телефонів.', rating: 5 },
+    { name: 'Іван Т.', text: 'Вже третій раз приходимо з друзями. Завжди весело, інструктори професійні, атмосфера супер!', rating: 5 },
+    { name: 'Наталія К.', text: 'Святкували день народження доньки. Все організовано на найвищому рівні, дякуємо команді!', rating: 5 },
+    { name: 'Сергій М.', text: 'Прийшли компанією з роботи на тімбілдінг. Всі залишились задоволені, особливо сподобалися тактичні сценарії.', rating: 5 },
+    { name: 'Андрій Л.', text: 'Сучасне обладнання, велика територія, привітний персонал. Однозначно рекомендую для сімейного відпочинку!', rating: 5 },
+    { name: 'Юлія В.', text: 'Нарешті знайшли ідеальне місце для активного дозвілля. Діти просять повернутися щотижня!', rating: 5 },
   ]
   const insertTestimonial = db.prepare('INSERT INTO testimonials (name, text, rating) VALUES (?, ?, ?)')
   for (const testimonial of testimonials) {
@@ -125,6 +133,32 @@ export async function seedDatabase() {
   seedTranslationsIfNeeded()
 
   console.log('Database seeded successfully')
+}
+
+// Add more testimonials if there are only 3
+function addMoreTestimonialsIfNeeded() {
+  const count = db.prepare('SELECT COUNT(*) as count FROM testimonials').get() as { count: number }
+  if (count.count >= 6) {
+    return // Already have enough
+  }
+
+  console.log('Adding more testimonials...')
+
+  const newTestimonials = [
+    { name: 'Олена П.', text: 'Чудове місце для активного відпочинку! Діти в захваті, а дорослі нарешті відволіклися від телефонів.', rating: 5 },
+    { name: 'Іван Т.', text: 'Вже третій раз приходимо з друзями. Завжди весело, інструктори професійні, атмосфера супер!', rating: 5 },
+    { name: 'Наталія К.', text: 'Святкували день народження доньки. Все організовано на найвищому рівні, дякуємо команді!', rating: 5 },
+    { name: 'Сергій М.', text: 'Прийшли компанією з роботи на тімбілдінг. Всі залишились задоволені, особливо сподобалися тактичні сценарії.', rating: 5 },
+    { name: 'Андрій Л.', text: 'Сучасне обладнання, велика територія, привітний персонал. Однозначно рекомендую для сімейного відпочинку!', rating: 5 },
+    { name: 'Юлія В.', text: 'Нарешті знайшли ідеальне місце для активного дозвілля. Діти просять повернутися щотижня!', rating: 5 },
+  ]
+
+  const insertTestimonial = db.prepare('INSERT INTO testimonials (name, text, rating) VALUES (?, ?, ?)')
+  for (const testimonial of newTestimonials) {
+    insertTestimonial.run(testimonial.name, testimonial.text, testimonial.rating)
+  }
+
+  console.log('Added 6 new testimonials')
 }
 
 // Seed translations from JSON files
