@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { db } from '../db/database'
 import { authMiddleware, AuthRequest } from '../middleware/auth'
 import { notifyNewBooking } from '../services/telegram'
+import { sendBookingEmail } from '../services/email'
 
 const router = Router()
 
@@ -31,9 +32,12 @@ router.post('/', (req, res) => {
       .prepare('INSERT INTO bookings (name, phone, players, date, time, source, message) VALUES (?, ?, ?, ?, ?, ?, ?)')
       .run(name, phone, players || null, date, time, source || null, message || null)
 
-    // Send Telegram notification (don't wait for it)
+    // Send notifications (don't wait for them)
     notifyNewBooking({ name, phone, players, date, time, source, message }).catch((err) => {
       console.error('Failed to send Telegram notification:', err)
+    })
+    sendBookingEmail({ name, phone, players, date, time, source, message }).catch((err) => {
+      console.error('Failed to send email notification:', err)
     })
 
     res.json({

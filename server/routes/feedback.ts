@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { db } from '../db/database'
 import { authMiddleware, AuthRequest } from '../middleware/auth'
 import { notifyNewFeedback } from '../services/telegram'
+import { sendFeedbackEmail } from '../services/email'
 
 const router = Router()
 
@@ -27,9 +28,12 @@ router.post('/', (req, res) => {
       .prepare('INSERT INTO feedback (name, email, phone, message) VALUES (?, ?, ?, ?)')
       .run(name, email, phone || null, message)
 
-    // Send Telegram notification (don't wait for it)
+    // Send notifications (don't wait for them)
     notifyNewFeedback({ name, email, phone, message }).catch((err) => {
       console.error('Failed to send Telegram notification:', err)
+    })
+    sendFeedbackEmail({ name, email, phone, message }).catch((err) => {
+      console.error('Failed to send email notification:', err)
     })
 
     res.json({

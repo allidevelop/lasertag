@@ -32,9 +32,9 @@ const languages = [
 ]
 
 // Contact links
-const TELEGRAM_URL = 'https://t.me/lasertag_kiev'
-const WHATSAPP_URL = 'https://wa.me/380972040707'
-const VIBER_URL = 'viber://chat?number=%2B380972040707'
+const TELEGRAM_URL = 'https://t.me/GanzPaintball'
+const WHATSAPP_URL = 'https://wa.me/380672040707'
+const VIBER_URL = 'viber://chat?number=%2B380672040707'
 
 export function Header() {
   const { t, i18n } = useTranslation()
