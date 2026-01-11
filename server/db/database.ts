@@ -2,7 +2,10 @@ import Database from 'better-sqlite3'
 import path from 'path'
 import fs from 'fs'
 
-const dataDir = path.join(process.cwd(), 'data')
+// Use /app/data for Railway Volume, otherwise local data folder
+const dataDir = process.env.RAILWAY_ENVIRONMENT
+  ? '/app/data'
+  : path.join(process.cwd(), 'data')
 const dbPath = path.join(dataDir, 'lasertag.db')
 
 // Create data directory if it doesn't exist
