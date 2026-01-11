@@ -3,18 +3,38 @@ import { useTranslation } from 'react-i18next'
 import { ChevronDown } from 'lucide-react'
 import { FadeIn } from '@/components/animations/FadeIn'
 import { cn } from '@/lib/utils'
+import { useContent } from '@/contexts/ContentContext'
 
-const faqItems = [
-  { key: 'q1', answerKey: 'a1' },
-  { key: 'q2', answerKey: 'a2' },
-  { key: 'q3', answerKey: 'a3' },
-  { key: 'q4', answerKey: 'a4' },
-  { key: 'q5', answerKey: 'a5' },
-]
+interface MultiLangText {
+  uk: string
+  ru: string
+  en: string
+}
+
+function getLocalizedText(text: string | MultiLangText, lang: string): string {
+  if (typeof text === 'string') {
+    // Try to parse as JSON for multilang support
+    try {
+      const parsed = JSON.parse(text)
+      if (parsed && typeof parsed === 'object') {
+        return parsed[lang] || parsed['uk'] || text
+      }
+    } catch {
+      // Not JSON, return as is
+      return text
+    }
+    return text
+  }
+  return text[lang as keyof MultiLangText] || text.uk || ''
+}
 
 export function FAQSection() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const { content } = useContent()
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const currentLang = i18n.language || 'uk'
+
+  const faqItems = content.faq || []
 
   return (
     <section id="faq" className="py-20 md:py-32 bg-section-1">
@@ -32,7 +52,7 @@ export function FAQSection() {
 
         <div className="max-w-3xl mx-auto space-y-4">
           {faqItems.map((item, index) => (
-            <FadeIn key={item.key} delay={index * 0.1}>
+            <FadeIn key={item.id} delay={index * 0.1}>
               <div
                 className={cn(
                   'bg-card rounded-xl border transition-all duration-300',
@@ -44,7 +64,7 @@ export function FAQSection() {
                   className="w-full px-6 py-5 flex items-center justify-between text-left"
                 >
                   <span className="font-medium text-lg pr-8">
-                    {t(`faq.${item.key}`)}
+                    {getLocalizedText(item.question, currentLang)}
                   </span>
                   <ChevronDown
                     className={cn(
@@ -61,7 +81,7 @@ export function FAQSection() {
                 >
                   <div className="overflow-hidden">
                     <p className="px-6 pb-5 text-muted-foreground">
-                      {t(`faq.${item.answerKey}`)}
+                      {getLocalizedText(item.answer, currentLang)}
                     </p>
                   </div>
                 </div>

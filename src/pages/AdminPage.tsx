@@ -394,6 +394,63 @@ export function AdminPage() {
     }
   }
 
+  // FAQ handlers
+  const parseFaqField = (field: string): { uk: string; ru: string; en: string } => {
+    try {
+      const parsed = JSON.parse(field)
+      if (typeof parsed === 'object' && parsed !== null) {
+        return { uk: parsed.uk || '', ru: parsed.ru || '', en: parsed.en || '' }
+      }
+    } catch {
+      // Not JSON, treat as single language
+    }
+    return { uk: field, ru: field, en: field }
+  }
+
+  const saveFaq = async (item: ContentData['faq'][0]) => {
+    setIsSaving(true)
+    try {
+      await api.updateFaq(item.id, item)
+      showSaveMessage('FAQ сохранён')
+    } catch (error) {
+      showSaveMessage('Ошибка сохранения')
+    }
+    setIsSaving(false)
+  }
+
+  const deleteFaqItem = async (id: number) => {
+    if (!confirm('Удалить вопрос?')) return
+    try {
+      await api.deleteFaq(id)
+      setContent(prev => prev ? { ...prev, faq: prev.faq.filter(f => f.id !== id) } : null)
+      showSaveMessage('Вопрос удалён')
+    } catch (error) {
+      showSaveMessage('Ошибка удаления')
+    }
+  }
+
+  const addFaqItem = async () => {
+    try {
+      const newItem = await api.createFaq({
+        question: JSON.stringify({ uk: 'Нове питання', ru: 'Новый вопрос', en: 'New question' }),
+        answer: JSON.stringify({ uk: 'Відповідь', ru: 'Ответ', en: 'Answer' })
+      })
+      setContent(prev => prev ? { ...prev, faq: [...prev.faq, newItem] } : null)
+    } catch (error) {
+      showSaveMessage('Ошибка добавления')
+    }
+  }
+
+  const updateFaqField = (index: number, field: 'question' | 'answer', lang: string, value: string) => {
+    if (!content) return
+    const item = content.faq[index]
+    const parsed = parseFaqField(item[field])
+    parsed[lang as keyof typeof parsed] = value
+    const newFaq = [...content.faq]
+    newFaq[index] = { ...item, [field]: JSON.stringify(parsed) }
+    setContent({ ...content, faq: newFaq })
+  }
+
   // HowToPlay handlers
   const saveHowToPlayStep = async (step: ContentData['howToPlay'][0]) => {
     setIsSaving(true)
@@ -530,12 +587,13 @@ export function AdminPage() {
 
         {content && (
           <Tabs defaultValue="hero" className="space-y-6">
-            <TabsList className="grid grid-cols-3 md:grid-cols-9 gap-2">
+            <TabsList className="grid grid-cols-3 md:grid-cols-10 gap-2">
               <TabsTrigger value="hero">Hero</TabsTrigger>
               <TabsTrigger value="images">Изображения</TabsTrigger>
               <TabsTrigger value="gallery">Галерея</TabsTrigger>
               <TabsTrigger value="pricing">Цены</TabsTrigger>
               <TabsTrigger value="howtoplay">Як замовити</TabsTrigger>
+              <TabsTrigger value="faq">FAQ</TabsTrigger>
               <TabsTrigger value="testimonials">Отзывы</TabsTrigger>
               <TabsTrigger value="contact">Контакты</TabsTrigger>
               <TabsTrigger value="bookings">Брони</TabsTrigger>
@@ -890,6 +948,109 @@ export function AdminPage() {
                   <Button variant="outline" onClick={addHowToPlayStep}>
                     <Plus className="w-4 h-4 mr-2" />
                     Додати крок
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* FAQ Section */}
+            <TabsContent value="faq">
+              <Card>
+                <CardHeader>
+                  <CardTitle>FAQ (Часті запитання)</CardTitle>
+                  <CardDescription>Редагуйте питання та відповіді на всіх мовах</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {content.faq?.map((item, index) => {
+                    const question = parseFaqField(item.question)
+                    const answer = parseFaqField(item.answer)
+                    return (
+                      <div key={item.id} className="p-4 border border-border rounded-lg space-y-4">
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">Питання #{index + 1}</span>
+                          <Button variant="ghost" size="sm" className="text-destructive" onClick={() => deleteFaqItem(item.id)}>
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+
+                        {/* Questions */}
+                        <div className="space-y-3">
+                          <Label className="font-medium">Питання:</Label>
+                          <div className="grid gap-2">
+                            <div className="flex items-center gap-2">
+                              <span className="w-8 text-sm font-medium text-muted-foreground">🇺🇦</span>
+                              <Input
+                                value={question.uk}
+                                onChange={(e) => updateFaqField(index, 'question', 'uk', e.target.value)}
+                                placeholder="Українською"
+                              />
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="w-8 text-sm font-medium text-muted-foreground">🇷🇺</span>
+                              <Input
+                                value={question.ru}
+                                onChange={(e) => updateFaqField(index, 'question', 'ru', e.target.value)}
+                                placeholder="По-русски"
+                              />
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="w-8 text-sm font-medium text-muted-foreground">🇬🇧</span>
+                              <Input
+                                value={question.en}
+                                onChange={(e) => updateFaqField(index, 'question', 'en', e.target.value)}
+                                placeholder="In English"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Answers */}
+                        <div className="space-y-3">
+                          <Label className="font-medium">Відповідь:</Label>
+                          <div className="grid gap-2">
+                            <div className="flex items-start gap-2">
+                              <span className="w-8 text-sm font-medium text-muted-foreground pt-2">🇺🇦</span>
+                              <Textarea
+                                value={answer.uk}
+                                onChange={(e) => updateFaqField(index, 'answer', 'uk', e.target.value)}
+                                placeholder="Українською"
+                                rows={2}
+                                className="flex-1"
+                              />
+                            </div>
+                            <div className="flex items-start gap-2">
+                              <span className="w-8 text-sm font-medium text-muted-foreground pt-2">🇷🇺</span>
+                              <Textarea
+                                value={answer.ru}
+                                onChange={(e) => updateFaqField(index, 'answer', 'ru', e.target.value)}
+                                placeholder="По-русски"
+                                rows={2}
+                                className="flex-1"
+                              />
+                            </div>
+                            <div className="flex items-start gap-2">
+                              <span className="w-8 text-sm font-medium text-muted-foreground pt-2">🇬🇧</span>
+                              <Textarea
+                                value={answer.en}
+                                onChange={(e) => updateFaqField(index, 'answer', 'en', e.target.value)}
+                                placeholder="In English"
+                                rows={2}
+                                className="flex-1"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <Button size="sm" onClick={() => saveFaq(item)} disabled={isSaving}>
+                          <Save className="w-4 h-4 mr-2" />
+                          Зберегти
+                        </Button>
+                      </div>
+                    )
+                  })}
+                  <Button variant="outline" onClick={addFaqItem}>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Додати питання
                   </Button>
                 </CardContent>
               </Card>

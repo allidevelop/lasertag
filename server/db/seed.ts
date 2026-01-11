@@ -151,11 +151,71 @@ export async function seedDatabase() {
   if (!tableHasData('faq')) {
     console.log('Seeding FAQ...')
     const faq = [
-      { question: 'З якого віку можна грати в лазертаг?', answer: 'Мінімальний вік для участі — 7 років. Гра абсолютно безпечна для дітей та дорослих, лазерні (інфрачервоні) промені нешкідливі.', sort_order: 1 },
-      { question: 'Що потрібно взяти з собою?', answer: 'Тільки зручний одяг та спортивне взуття. Рекомендуємо кепку. Все обладнання надається на місці. Спеціальна екіпіровка не потрібна.', sort_order: 2 },
-      { question: 'Скільки людей може грати одночасно?', answer: 'На одній площадці можуть грати до 30 осіб. У нас є 3 ігрові площадки, тому можемо прийняти великі групи.', sort_order: 3 },
-      { question: 'Чи є лазертаг чесною грою?', answer: 'Так! Всі влучання фіксуються електронно датчиками на жилетах. Після гри кожен гравець отримує статистику: кількість влучань та поразок.', sort_order: 4 },
-      { question: 'Чи можна замовити їжу та напої?', answer: "Так, у нас є затишні альтанки для відпочинку та можливість замовлення кейтерингу. Ідеально для святкування днів народження та корпоративів.", sort_order: 5 },
+      {
+        question: JSON.stringify({
+          uk: 'З якого віку можна грати?',
+          ru: 'С какого возраста можно играть?',
+          en: 'What is the minimum age to play?'
+        }),
+        answer: JSON.stringify({
+          uk: 'Ми рекомендуємо починати грати дітям від 7 років',
+          ru: 'Мы рекомендуем начинать играть детям от 7 лет',
+          en: 'We recommend children start playing from 7 years old'
+        }),
+        sort_order: 1
+      },
+      {
+        question: JSON.stringify({
+          uk: 'Чи безпечно це?',
+          ru: 'Безопасно ли это?',
+          en: 'Is it safe?'
+        }),
+        answer: JSON.stringify({
+          uk: 'Так. Лазертаг не має фізичного контакту',
+          ru: 'Да. Лазертаг не имеет физического контакта',
+          en: 'Yes. Lasertag has no physical contact'
+        }),
+        sort_order: 2
+      },
+      {
+        question: JSON.stringify({
+          uk: 'Скільки триває гра?',
+          ru: 'Сколько длится игра?',
+          en: 'How long does the game last?'
+        }),
+        answer: JSON.stringify({
+          uk: 'Середня тривалість гри 1.5 години, але ви можете самі обрати від однієї години',
+          ru: 'Средняя продолжительность игры 1.5 часа, но вы можете сами выбрать от одного часа',
+          en: 'Average game duration is 1.5 hours, but you can choose from one hour'
+        }),
+        sort_order: 3
+      },
+      {
+        question: JSON.stringify({
+          uk: 'Скільки людей мінімум?',
+          ru: 'Сколько людей минимум?',
+          en: 'Minimum number of people?'
+        }),
+        answer: JSON.stringify({
+          uk: 'Мінімальна кількість для гри — 8 гравців',
+          ru: 'Минимальное количество для игры — 8 игроков',
+          en: 'Minimum number for a game is 8 players'
+        }),
+        sort_order: 4
+      },
+      {
+        question: JSON.stringify({
+          uk: 'Що вдягати?',
+          ru: 'Что надевать?',
+          en: 'What to wear?'
+        }),
+        answer: JSON.stringify({
+          uk: 'Зручний одяг та взуття. Обов\'язково взяти кепку або панамку',
+          ru: 'Удобную одежду и обувь. Обязательно взять кепку или панамку',
+          en: 'Comfortable clothes and shoes. Make sure to bring a cap or hat'
+        }),
+        sort_order: 5
+      },
     ]
     const insertFaq = db.prepare('INSERT INTO faq (question, answer, sort_order) VALUES (?, ?, ?)')
     for (const item of faq) {
