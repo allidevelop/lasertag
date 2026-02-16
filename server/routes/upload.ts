@@ -6,8 +6,10 @@ import { authMiddleware, AuthRequest } from '../middleware/auth'
 
 const router = Router()
 
-// Ensure uploads directory exists
-const uploadsDir = path.join(process.cwd(), 'uploads')
+// Use Railway Volume for persistent storage, local directory for development
+const uploadsDir = process.env.RAILWAY_ENVIRONMENT
+  ? '/app/data/uploads'
+  : path.join(process.cwd(), 'uploads')
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true })
 }
