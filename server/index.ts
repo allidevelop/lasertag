@@ -26,8 +26,10 @@ app.use('/api', (req, res, next) => {
   next()
 })
 
-// Create uploads directory if it doesn't exist
-const uploadsDir = path.join(process.cwd(), 'uploads')
+// Create uploads directory - use Volume on Railway, local otherwise
+const uploadsDir = process.env.RAILWAY_ENVIRONMENT
+  ? '/app/data/uploads'
+  : path.join(process.cwd(), 'uploads')
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true })
 }
