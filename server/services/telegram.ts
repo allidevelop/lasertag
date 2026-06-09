@@ -1,7 +1,33 @@
 // Telegram notification service
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8543054496:AAFAPCqK7zm6TzXuDpkaSVRhTMUUsqGJaFI'
-const CHAT_IDS = (process.env.TELEGRAM_CHAT_IDS || '88017031,472415624,6552346228').split(',')
+const DEFAULT_CHAT_IDS = '88017031,472415624,6552346228'
+let didWarnMissingConfig = false
+
+function getTelegramConfig(): { botToken: string; chatIds: string[] } | null {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN
+  const chatIds = (process.env.TELEGRAM_CHAT_IDS || DEFAULT_CHAT_IDS)
+    .split(',')
+    .map((chatId) => chatId.trim())
+    .filter(Boolean)
+
+  if (!botToken) {
+    if (!didWarnMissingConfig) {
+      console.warn('Telegram notifications are disabled: TELEGRAM_BOT_TOKEN is not set')
+      didWarnMissingConfig = true
+    }
+    return null
+  }
+
+  if (chatIds.length === 0) {
+    if (!didWarnMissingConfig) {
+      console.warn('Telegram notifications are disabled: TELEGRAM_CHAT_IDS is empty')
+      didWarnMissingConfig = true
+    }
+    return null
+  }
+
+  return { botToken, chatIds }
+}
 
 interface BookingData {
   name: string
@@ -20,9 +46,9 @@ interface FeedbackData {
   message: string
 }
 
-async function sendTelegramMessage(chatId: string, text: string): Promise<boolean> {
+async function sendTelegramMessage(botToken: string, chatId: string, text: string): Promise<boolean> {
   try {
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -49,7 +75,12 @@ async function sendTelegramMessage(chatId: string, text: string): Promise<boolea
 }
 
 async function sendToAllChats(text: string): Promise<void> {
-  const promises = CHAT_IDS.map((chatId) => sendTelegramMessage(chatId.trim(), text))
+  const config = getTelegramConfig()
+  if (!config) {
+    return
+  }
+
+  const promises = config.chatIds.map((chatId) => sendTelegramMessage(config.botToken, chatId, text))
   await Promise.allSettled(promises)
 }
 

@@ -1,3 +1,34 @@
+# Lasertag
+
+## Railway deployment
+
+The production app is a Node/Express server that serves the built Vite frontend from `dist`.
+
+Recommended Railway service settings:
+
+- Build command: `npm run build`
+- Start command: `npm run start`
+- Root directory: repository root
+- Deploy branch: `main`
+- Node.js: `24.x` from `package.json` `engines`
+
+Required service variables:
+
+- `TELEGRAM_BOT_TOKEN` - Telegram bot token for booking and feedback notifications.
+- `TELEGRAM_CHAT_IDS` - Comma-separated Telegram chat IDs. If omitted, the current production recipients from the legacy setup are used.
+- `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_TO` - Email notification settings.
+- `JWT_SECRET` - Secret used to sign admin auth tokens.
+
+To enable automatic deployments:
+
+1. In Railway, connect the service source to `allidevelop/lasertag`.
+2. Set the deploy branch to `main`.
+3. Enable GitHub autodeploys for the service.
+4. Add or update the service variables above.
+5. Push changes to `main`; Railway will deploy the new commit automatically.
+
+Do not commit real tokens or passwords. Use Railway service variables for production secrets.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
